@@ -3,3 +3,10 @@ version: '${project.version}'
 main: me.freezy.plugins.worldsaver.Worldsaver
 api-version: '1.20'
 load: STARTUP
+commands:
+  saveworld:
+    usage: /saveworld
+    aliases: [ worldsave ]
+  loadworld:
+    usage: /loadworld
+    aliases: [ worldload ]
