@@ -1,0 +1,5 @@
+name: worldsaver
+version: '${project.version}'
+main: me.freezy.plugins.worldsaver.Worldsaver
+api-version: '1.20'
+load: STARTUP
