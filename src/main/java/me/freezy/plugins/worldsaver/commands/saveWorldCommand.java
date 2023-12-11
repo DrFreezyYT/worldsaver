@@ -1,6 +1,6 @@
 package me.freezy.plugins.worldsaver.commands;
 
-import me.freezy.plugins.worldsaver.Worldsaver;
+import me.freezy.plugins.worldsaver.worldsaver.Worldsaver;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 
-public class saveworld implements CommandExecutor {
+public class saveWorldCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {

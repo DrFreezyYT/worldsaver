@@ -1,6 +1,6 @@
 name: worldsaver
 version: '${project.version}'
-main: me.freezy.plugins.worldsaver.Worldsaver
+main: me.freezy.plugins.worldsaver.worldsaver.Worldsaver
 api-version: '1.20'
 load: STARTUP
 commands:
@@ -10,3 +10,6 @@ commands:
   loadworld:
     usage: /loadworld <name>
     aliases: [ worldload ]
+  deleteworld:
+    usage: /deleteworld <name>
+    aliases: [ delworld, worlddel, worlddelete ]

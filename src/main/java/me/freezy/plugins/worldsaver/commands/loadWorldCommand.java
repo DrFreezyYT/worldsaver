@@ -1,6 +1,6 @@
 package me.freezy.plugins.worldsaver.commands;
 
-import me.freezy.plugins.worldsaver.Worldsaver;
+import me.freezy.plugins.worldsaver.worldsaver.Worldsaver;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -16,11 +16,10 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class loadworld implements CommandExecutor, TabCompleter {
+public class loadWorldCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
@@ -75,6 +74,7 @@ public class loadworld implements CommandExecutor, TabCompleter {
 
         return false;
     }
+
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         File worldsFolder = new File(Worldsaver.getInstance().getDataFolder().getPath() + "/worlds");
