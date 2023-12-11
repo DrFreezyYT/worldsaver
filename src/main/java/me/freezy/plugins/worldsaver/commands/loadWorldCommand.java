@@ -40,9 +40,6 @@ public class loadWorldCommand implements CommandExecutor, TabCompleter {
                 player.kick(Component.text("The Server stops to load the world"));
 
                 try {
-                    if (dataWorldFolder.exists()) {
-                        FileUtils.deleteDirectory(dataWorldFolder);
-                    }
                     FileUtils.copyDirectory(dataWorldFolder, worldFolder);
                 } catch (IOException e) {
                     sender.getServer().getLogger().severe(new RuntimeException(e).toString());
@@ -59,9 +56,6 @@ public class loadWorldCommand implements CommandExecutor, TabCompleter {
                 player.kick(Component.text("The Server stops to load the world"));
 
                 try {
-                    if (dataWorldFolder.exists()) {
-                        FileUtils.deleteDirectory(dataWorldFolder);
-                    }
                     FileUtils.copyDirectory(dataWorldFolder, worldFolder);
                 } catch (IOException e) {
                     sender.getServer().getLogger().severe(new RuntimeException(e).toString());
