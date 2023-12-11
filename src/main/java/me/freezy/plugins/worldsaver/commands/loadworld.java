@@ -15,8 +15,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class loadworld implements CommandExecutor, TabCompleter {
     @Override
@@ -76,16 +78,16 @@ public class loadworld implements CommandExecutor, TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         File worldsFolder = new File(Worldsaver.getInstance().getDataFolder().getPath() + "/worlds");
-        File[] worldsList = worldsFolder.listFiles();
-        if (worldsList != null) for (File file : worldsList) {
-            if (file.isDirectory()) {
-                String name = file.getName();
-                Worldsaver.getInstance().getConfig().set("worlds_" + name, true);
-            }
+        File[] files = worldsFolder.listFiles(File::isDirectory);
+
+        List<String> directories = new ArrayList<>();
+        for (File file : Objects.requireNonNull(files)) {
+            directories.add(file.getName());
         }
 
         if (args.length >= 1) {
-            return Arrays.asList(Arrays.toString(worldsFolder.listFiles()));
+            System.out.println(directories);
+            return directories;
         }
 
         return null;
