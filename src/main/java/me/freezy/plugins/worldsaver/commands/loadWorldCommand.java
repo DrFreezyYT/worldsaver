@@ -80,7 +80,6 @@ public class loadWorldCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length >= 1) {
-            System.out.println(directories);
             return directories;
         }
 
