@@ -3,6 +3,19 @@ version: '${project.version}'
 main: me.freezy.plugins.worldsaver.worldsaver.Worldsaver
 api-version: '1.20'
 load: STARTUP
+permissions:
+  wssaver.admin:
+    description: Allows all cmds!
+    default: op
+  wssaver.use.savecmd:
+    description: Allows specific cmds!
+    default: false
+  wssaver.use.loadcmd:
+    description: Allows specific cmds!
+    default: false
+  wssaver.use.delcmd:
+    description: Allows specific cmds!
+    default: false
 commands:
   saveworld:
     usage: /saveworld <name>

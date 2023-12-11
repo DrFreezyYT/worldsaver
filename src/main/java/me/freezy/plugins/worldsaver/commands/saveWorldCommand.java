@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.NotFileFilter;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,6 +23,12 @@ public class saveWorldCommand implements CommandExecutor {
         if (sender instanceof Player) {
             if (args.length >= 1) {
                 Player player = (Player) sender;
+
+                if (!player.hasPermission("wssaver.admin") || !player.hasPermission("wssaver.use.delccmd")) {
+                    player.sendMessage(ChatColor.RED + "Not enough Permissions!");
+                    return false;
+                }
+
                 player.sendMessage("The server may lag!");
                 World world = player.getWorld();
                 File worldFolder = world.getWorldFolder();

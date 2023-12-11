@@ -2,6 +2,7 @@ package me.freezy.plugins.worldsaver.commands;
 
 import me.freezy.plugins.worldsaver.worldsaver.Worldsaver;
 import org.apache.commons.io.FileUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,6 +22,12 @@ public class deleteWorldCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
+
+            if (!player.hasPermission("wssaver.admin") || !player.hasPermission("wssaver.use.delccmd")) {
+                player.sendMessage(ChatColor.RED + "Not enough Permissions!");
+                return false;
+            }
+
             File dataFolder = Worldsaver.getInstance().getDataFolder();
             File dataWorldFolder;
             if (args.length >= 1) {

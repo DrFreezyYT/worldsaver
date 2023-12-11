@@ -4,6 +4,7 @@ import me.freezy.plugins.worldsaver.worldsaver.Worldsaver;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,6 +25,12 @@ public class loadWorldCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
+
+            if (!player.hasPermission("wssaver.admin") || !player.hasPermission("wssaver.use.delccmd")) {
+                player.sendMessage(ChatColor.RED + "Not enough Permissions!");
+                return false;
+            }
+
             World world = player.getWorld();
             File worldFolder = world.getWorldFolder();
             File dataFolder = Worldsaver.getInstance().getDataFolder();
