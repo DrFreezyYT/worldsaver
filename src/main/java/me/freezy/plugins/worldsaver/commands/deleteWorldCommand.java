@@ -1,6 +1,7 @@
 package me.freezy.plugins.worldsaver.commands;
 
 import me.freezy.plugins.worldsaver.worldsaver.Worldsaver;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +30,11 @@ public class deleteWorldCommand implements CommandExecutor, TabCompleter {
                     player.sendMessage("no save");
                     return true;
                 } else if (dataWorldFolder.exists()) {
-                    dataWorldFolder.delete();
+                    try {
+                        FileUtils.deleteDirectory(dataWorldFolder);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     player.sendMessage("save deleted");
                 }
             }
@@ -37,7 +43,7 @@ public class deleteWorldCommand implements CommandExecutor, TabCompleter {
         }
 
 
-        return false;
+        return true;
     }
 
     @Override

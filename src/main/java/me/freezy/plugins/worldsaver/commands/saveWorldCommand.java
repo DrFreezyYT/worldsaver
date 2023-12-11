@@ -2,6 +2,9 @@ package me.freezy.plugins.worldsaver.commands;
 
 import me.freezy.plugins.worldsaver.worldsaver.Worldsaver;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.IOFileFilter;
+import org.apache.commons.io.filefilter.NameFileFilter;
+import org.apache.commons.io.filefilter.NotFileFilter;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 
+@SuppressWarnings({"resource", "deprication", "unchecked", "ResultOfMethodCallIgnored"})
 public class saveWorldCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -25,10 +29,13 @@ public class saveWorldCommand implements CommandExecutor {
 
                 File dataWorldFolder = new File(dataFolder.getPath() + "/worlds" + "/" + args[0]);
 
+                IOFileFilter filter = new NotFileFilter(new NameFileFilter("session.lock"));
+
                 world.save();
 
                 try {
-                    FileUtils.copyDirectory(worldFolder, dataWorldFolder);
+                    if (dataWorldFolder.exists()) FileUtils.deleteDirectory(dataWorldFolder);
+                    FileUtils.copyDirectory(worldFolder, dataWorldFolder, filter, true);
                 } catch (IOException e) {
                     sender.getServer().getLogger().severe(new RuntimeException(e).toString());
                 }
@@ -54,6 +61,6 @@ public class saveWorldCommand implements CommandExecutor {
         } else {
             sender.getServer().getLogger().severe("You must be a Player, otherwise the server might corrupt!");
         }
-        return false;
+        return true;
     }
 }

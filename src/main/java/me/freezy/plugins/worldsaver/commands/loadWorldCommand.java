@@ -41,7 +41,7 @@ public class loadWorldCommand implements CommandExecutor, TabCompleter {
 
                 try {
                     if (dataWorldFolder.exists()) {
-                        dataWorldFolder.delete();
+                        FileUtils.deleteDirectory(dataWorldFolder);
                     }
                     FileUtils.copyDirectory(dataWorldFolder, worldFolder);
                 } catch (IOException e) {
@@ -60,7 +60,7 @@ public class loadWorldCommand implements CommandExecutor, TabCompleter {
 
                 try {
                     if (dataWorldFolder.exists()) {
-                        dataWorldFolder.delete();
+                        FileUtils.deleteDirectory(dataWorldFolder);
                     }
                     FileUtils.copyDirectory(dataWorldFolder, worldFolder);
                 } catch (IOException e) {
@@ -72,7 +72,7 @@ public class loadWorldCommand implements CommandExecutor, TabCompleter {
             sender.getServer().getLogger().severe("You must be a Player, otherwise the server might corrupt!");
         }
 
-        return false;
+        return true;
     }
 
     @Override
